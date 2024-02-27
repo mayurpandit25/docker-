@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/mayurpandit25/docker-.git'
+            }
+        }
+		stage('docker build') {
+            steps {
+                sh '''
+                docker build -t demopipline .
+                '''
+            }
+        }
+		stage('docker push ') {
+            steps {
+                sh ''' 
+				aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 125932985618.dkr.ecr.ap-southeast-1.amazonaws.com
+				docker tag demopipline:latest 125932985618.dkr.ecr.ap-southeast-1.amazonaws.com/demopipline:latest
+				docker push 125932985618.dkr.ecr.ap-southeast-1.amazonaws.com/demopipline:latest
+				'''
+            }
+        }
+    }
+}
