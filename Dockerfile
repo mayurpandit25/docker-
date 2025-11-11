@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
-CMD ["bash"]
+CMD ["echo", "Hello from Docker!"]
+
 #FROM ubuntu:latest
 #RUN apt update -y && apt install nginx -y 
 #EXPOSE 80
