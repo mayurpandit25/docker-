@@ -1,7 +1,9 @@
-FROM ubuntu:latest
-RUN apt update -y && apt install nginx -y 
-EXPOSE 80
-CMD ["nginx" ,"-c" ,"daemon off;"]
+FROM ubuntu:22.04
+CMD ["bash"]
+#FROM ubuntu:latest
+#RUN apt update -y && apt install nginx -y 
+#EXPOSE 80
+#CMD ["nginx" ,"-c" ,"daemon off;"]
 #FROM amazonlinux:latest
 #RUN yum install java-openjdk -y
 #ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.112/bin/apache-tomcat-9.0.112.tar.gz .
