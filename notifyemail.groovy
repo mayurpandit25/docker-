@@ -41,12 +41,12 @@ pipeline {
         success {
             emailext body: 'Docker push succeeded.',
                      subject: 'Jenkins Notification: Docker Push Successful',
-                     to: 'mayur@gmail.com'
+                     to: 'panditmayur888@gmail.com'
         }
         failure {
             emailext body: 'Docker push failed.',
                      subject: 'Jenkins Notification: Docker Push Failed',
-                     to: 'mayur@gamil.com'
+                     to: 'panditmayur888@gmail.com'
         }
     }
 }
