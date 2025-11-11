@@ -2,19 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/mayurpandit25/docker-.git'
             }
         }
-        stage('docker build') {
+
+        stage('Docker Build') {
             steps {
                 sh '''
                 docker build -t mayurpandit25/demopipline:latest .
                 '''
             }
         }
-        stage('docker push') {
+
+        stage('Approval') {
+            steps {
+                script {
+                    // Ask for approval before proceeding with Docker push
+                    input message: 'Do you want to proceed with Docker push?', submitter: 'admin'
+                }
+            }
+        }
+
+        stage('Docker Push') {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKERHUB_CREDENTIALS')]) {
