@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mayurpandit25/docker-.git'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh '''
+                docker build -t mayurpandit25/demopipline:latest .
+                '''
+            }
+        }
+
+        stage('Approval') {
+            steps {
+                script {
+                    // Ask for approval before proceeding with Docker push
+                    input message: 'Do you want to proceed with Docker push?', submitter: 'admin'
+                }
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKERHUB_CREDENTIALS')]) {
+                        sh "echo \$DOCKERHUB_CREDENTIALS | docker login --username mayurpandit25 --password-stdin"
+                        sh "docker push mayurpandit25/demopipline:latest"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            emailext body: 'Docker push succeeded.',
+                     subject: 'Jenkins Notification: Docker Push Successful',
+                     to: 'mayur@gmail.com'
+        }
+        failure {
+            emailext body: 'Docker push failed.',
+                     subject: 'Jenkins Notification: Docker Push Failed',
+                     to: 'mayur@gamil.com'
+        }
+    }
+}
+
