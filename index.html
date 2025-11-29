@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Streamly — Netflix-like Landing (Demo)</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family: 'Helvetica Neue', Arial, sans-serif;background:#141414;color:#fff}
+
+    .nav{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:50;background:linear-gradient(180deg, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.55) 40%, rgba(20,20,20,0) 100%)}
+    .brand{font-weight:800;font-size:26px;letter-spacing:1px;color:#e50914}
+    .nav .links{display:flex;gap:18px;align-items:center}
+    .nav a{color:#e5e5e5;text-decoration:none;font-size:14px}
+    .btn-sign{background:#e50914;color:#fff;border:none;padding:8px 14px;border-radius:4px;font-weight:700;cursor:pointer}
+
+    .hero{height:65vh;min-height:420px;position:relative;display:flex;align-items:flex-end;padding:40px 60px;background-image:linear-gradient(90deg, rgba(20,20,20,0.6) 10%, rgba(20,20,20,0.2) 60%), url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center}
+    .hero .content{max-width:720px}
+    .title{font-size:48px;font-weight:800;margin-bottom:12px}
+    .subtitle{font-size:18px;color:#e5e5e5;opacity:0.95;margin-bottom:18px}
+    .actions{display:flex;gap:12px}
+    .btn-play{background:rgba(255,255,255,0.95);color:#000;border:none;padding:12px 18px;border-radius:4px;font-weight:700;cursor:pointer}
+    .btn-more{background:rgba(109,109,110,0.7);color:#fff;border:none;padding:12px 18px;border-radius:4px;font-weight:700;cursor:pointer}
+
+    .section{padding:20px 40px 36px}
+    .section h3{font-size:20px;margin-bottom:10px}
+    .row{position:relative}
+    .row-track{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scroll-behavior:smooth}
+    .card{min-width:200px;height:120px;border-radius:6px;background:#222;flex:0 0 auto;position:relative;overflow:hidden;cursor:pointer;transition:transform .18s ease-in-out}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .card:hover{transform:scale(1.12);z-index:40}
+
+    footer{padding:40px;color:#b3b3b3;text-align:center;font-size:14px}
+
+    @media (max-width:800px){
+      .title{font-size:28px}
+      .hero{padding:28px}
+      .card{min-width:140px;height:92px}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="brand">STREAMLY</div>
+    <div class="links">
+      <a href="#">Home</a>
+      <a href="#">TV Shows</a>
+      <a href="#">Movies</a>
+      <a href="#">Latest</a>
+      <a href="#">My List</a>
+      <button class="btn-sign">Sign In</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="content">
+      <div class="title">Watch great movies and shows</div>
+      <div class="subtitle">Streamly — A Netflix-inspired UI rebuilt using pure HTML & CSS.</div>
+      <div class="actions">
+        <button class="btn-play">▶ Play</button>
+        <button class="btn-more">More Info</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <h3>Because you watched drama</h3>
+      <div class="row">
+        <div class="row-track">
+          <div class="card"><img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1505685296765-3a2736de412f?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1517602302552-471fe67acf66?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1517602383974-4ae3c2a8f102?auto=format&fit=crop&w=500&q=60" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>Top picks for you</h3>
+      <div class="row">
+        <div class="row-track">
+          <div class="card"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1512427691650-1ca9f389b89b?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=500&q=60" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h3>Trending Now</h3>
+      <div class="row">
+        <div class="row-track">
+          <div class="card"><img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=500&q=60" /></div>
+          <div class="card"><img src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=500&q=60" /></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © Streamly Demo — Netflix-style UI for learning & practice.
+  </footer>
+
+</body>
+</html>
