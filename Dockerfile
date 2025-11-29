@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
-CMD ["echo", "Hello from Docker!"]
+RUN apt update -y && apt install nginx -y
+COPY index.html /var/www/html/index.html
+CMD ["nginx","-g","daemon off;"]
 
 #FROM ubuntu:latest
 #RUN apt update -y && apt install nginx -y 
