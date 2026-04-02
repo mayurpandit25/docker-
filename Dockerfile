@@ -4,7 +4,7 @@
 #CMD ["nginx","-g","daemon off;"]
 
 FROM ubuntu:latest
-RUN apt update -y && apt install nginx -y 
+RUN apt update -y && apt install nginx -y
 EXPOSE 80
 CMD ["nginx" ,"-c" ,"daemon off;"]
 
