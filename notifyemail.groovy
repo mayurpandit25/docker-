@@ -11,7 +11,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh '''
-                docker build -t mayurpandit25/demopipline:latest .
+                docker build -t mayurpandit25/nginx:latest .
                 '''
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKERHUB_CREDENTIALS')]) {
                         sh "echo \$DOCKERHUB_CREDENTIALS | docker login --username mayurpandit25 --password-stdin"
-                        sh "docker push mayurpandit25/demopipline:latest"
+                        sh "docker push mayurpandit25/nginx:latest"
                     }
                 }
             }
