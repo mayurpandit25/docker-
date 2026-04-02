@@ -1,0 +1,51 @@
+pipeline {
+    agent { label 'worker' }
+
+    environment {
+        IMAGE = "mayurpandit25/demopipeline:latest"
+    }
+
+    stages {
+
+        stage('checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mayurpandit25/docker-.git'
+            }
+        }
+
+        stage('docker build') {
+            steps {
+                sh '''
+                docker build -t $IMAGE .
+                '''
+            }
+        }
+
+        stage('docker push') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'dockerhub-credentials-id', variable: 'DOCKERHUB_CREDENTIALS')]) {
+                        sh "echo \$DOCKERHUB_CREDENTIALS | docker login --username mayurpandit25 --password-stdin"
+                        sh "docker push $IMAGE"
+                    }
+                }
+            }
+        }
+
+        stage('deploy on ec2 node') {
+            steps {
+                sh '''
+                docker pull $IMAGE
+
+                # Stop old container if running
+                docker rm -f tomcatapp || true
+
+                # Run new Tomcat container
+                docker run -d --name tomcatapp -p 8081:8080 $IMAGE
+
+                docker ps
+                '''
+            }
+        }
+    }
+}
